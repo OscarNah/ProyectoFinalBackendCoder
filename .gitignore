@@ -1,0 +1,10 @@
+# Ignora la carpeta node_modules
+node_modules/
+# Ignora la carpeta test
+test/
+# Ignora configuración de VSCode
+.vscode/
+# Ignora archivos de variables de entorno
+.env
+.env.desarrollo
+.env.produccion

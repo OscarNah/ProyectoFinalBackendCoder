@@ -1,0 +1,58 @@
+<style>
+   /* HEADER */ .role {text-transform: uppercase;}.navbar { position: fixed; top: 0; left: 0; width: 100%; background-color: #45a050; padding: 10px; display: flex; justify-content: space-between; } .home a:hover{ border-radius: 1rem; color: black; } .nav { list-style: none; margin: 0; padding: 0; } .nav li { font-size: 3rem; margin-right: 20px; display: inline; } .nav a { color: white; text-decoration: none; } .nav a:hover { border-radius: 1rem; color: black; } .left p a{ font-size: 3rem; text-decoration: none; color: white; } /* FIN DEL HEADER */ main{ margin-top: 6.7rem; } header { background-color: black; margin-bottom: 1rem; text-align: center; width: 100%; } header h1 { color: white; font-size: 4rem; } /* Wrapper profile*/ .wrapper { display: flex; justify-content: center; align-items: center; height: 79vh; background-color: #4caf50; } .profile-container { background-color: white; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); padding: 20px; width: 300px; } .profile-container h2 { margin-top: 0; margin-bottom: 20px; text-align: center; } .botonVerde { background-color: #4caf50; border: none; cursor: pointer; font-size: 16px; padding: 10px 5px; border-radius: 3px; width: 100%; text-decoration: none; } .botonVerde:hover { background-color: #45a049; } .profile-container a { display: block; text-align: center; margin-top: 15px; color: white; text-decoration: none; } .profile-container a:hover { text-decoration: none; } .logout{ margin-top: 1rem; background-color: black; border: none; cursor: pointer; font-size: 16px; padding: 10px 10px; border-radius: 3px; width: 100%; color: white; } .datos{ list-style: none; } .datos li{ padding-bottom: 10px; font-size: 1rem; } .miPerfil { align-items: center; text-align: center; border: 1rem solid black; } .miPerfil h2 { color: #45a049; font-size: 2rem; } .miPerfil a { display: inline-block; padding: 10px 20px; background-color: #4caf50; /* Color de fondo del botón */ color: #fff; /* Color del texto del botón */ text-decoration: none; /* Quitar subrayado del enlace */ border: none; /* Quitar borde */ border-radius: 5px; /* Añadir bordes redondeados */ cursor: pointer; /* Cambiar cursor a pointer al pasar sobre el botón */ transition: background-color 0.3s; /* Efecto de transición */ margin: 1rem; } .miPerfil a:hover { background-color: #45a049; /* Cambiar color de fondo al pasar el ratón */ }
+/* Estilo para la tabla de administración de usuarios */
+section { margin-top: 20px; } table { width: 100%; border-collapse: collapse; border: 1px solid #ddd; background-color: #f9f9f9; } h2{ text-align: center;} table th, table td { border: 1px solid #ddd; padding: 8px; text-align: left; } table th { background-color: #f2f2f2; } table td { background-color: #fff; } /* Estilo para los botones de acción */ button { cursor: pointer; padding: 8px 12px; border: none; background-color: #4caf50; color: #fff; border-radius: 4px; transition: background-color 0.3s; } button:hover { background-color: #45a049; } /* Estilo para el formulario de cambio de rol */ form { display: inline-block; }
+   
+</style>
+
+
+<main>
+  <header>
+    <h1>VISTA DE ADMINISTRADOR</h1>
+  </header>
+  <div class="miPerfil">
+    <h2>ADMINISTRADOR</h2>
+    <h3 class="role" id="role">ROL: {{role}}</h3>
+    <h3 id="email">EMAIL: {{email}}</h3>
+  </div>
+
+  <section>
+    <h2>Administración de Usuarios</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users}}
+        <tr>
+          <td>{{this.first_name}}</td>
+          <td>{{this.last_name}}</td>
+          <td>{{this.email}}</td>
+          <td>
+            <form id="form-{{this._id}}" data-id="{{this._id}}">
+              <select name="role">
+                <option value="usuario" {{#if (eq this.role 'usuario')}}selected{{/if}}>Usuario</option>
+                <option value="premium" {{#if (eq this.role 'premium')}}selected{{/if}}>Premium</option>
+                <option value="admin" {{#if (eq this.role 'admin')}}selected{{/if}}>Admin</option>
+              </select>
+              <button type="submit" class="cambiar-rol">Cambiar Rol</button>
+            </form>
+          </td>
+          <td>
+            <button type="button" class="eliminar-usuario" data-id="{{this._id}}">Eliminar</button>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/admin.js"></script>

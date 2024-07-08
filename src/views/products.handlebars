@@ -1,0 +1,39 @@
+<main>
+    <header>
+        <h1> Productos </h1>
+    </header>
+    <div class="miPerfil">
+        <h2>Productos</h2>
+        <a href="/api/users/profile">Regresar a Perfil</a>
+        <a href="/carts/{{cartId}}">Ir a carrito</a>
+    </div>
+
+
+    <div class="container">
+        {{#each productos}}
+        <div class="productCard">
+            <img class="productImage" src="{{img}}">
+            <div class="productDetails">
+                <h3 style="border-bottom: 1px solid black;" class="productName">{{title}}</h3>
+                <p class="productDescription">
+                <p>{{description}}</p><br>
+                <p style="border-top: 1px solid black;">Price: ${{price}}</p><br>
+                <p style="border-top: 1px solid black;">Category: {{category}} </p><br>
+                </p>
+                <form action="/api/carts/{{../cartId}}/product/{{id}}" method="POST">
+                    <button class="btnAgregar" type="submit"> Agregar al Carrito </button>
+                </form>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="paginacion">
+        {{#if hasPrevPage}}
+        <a class="btnPage" href="/products?page={{prevPage}}"> Anterior <a />
+            {{/if}}
+            <p class="numeroPagina"> Pagina {{currentPage}} de {{totalPages}} </p>
+            {{#if hasNextPage}}
+            <a class="btnPage" href="/products?page={{nextPage}}"> Siguiente <a />
+                {{/if}}
+    </div>
+</main>
