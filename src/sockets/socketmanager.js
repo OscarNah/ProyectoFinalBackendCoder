@@ -3,6 +3,7 @@ const ProductRepository = require("../repositories/product.repository.js");
 const productRepository = new ProductRepository(); 
 const EmailManager = require("../service/email.js");
 const emailManager = new EmailManager();
+const MessageModel = require("../models/message.model.js");
 
 class SocketManager {
     constructor(httpServer) {
